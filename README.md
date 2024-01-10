@@ -2,7 +2,7 @@
 Simple CRUD with JWT auth using golang Echo and javascript React
 
 ## **Packages used**
-- https://github.com/spf13/viper
+- github.com/spf13/viper
 - github.com/labstack/echo/v4
 - github.com/go-playground/validator/v10
 - gorm.io/driver/postgres
@@ -30,6 +30,9 @@ Based on repository pattern, this project use:
 - Entity: Contains set of database atribute
 - Model: Contains set of data that will be parsed or send as request or response
 - Controller layer: Acts to mapping users input/request and presented it back to user as relevant responses
+
+## TODO
+- React frontend :")
 
 ## **API Endpoints**
 
