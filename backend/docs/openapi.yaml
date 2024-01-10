@@ -59,7 +59,7 @@ paths:
                   data:
                     type: array
                     items: 
-                      $ref: './schema/post_schema.yml'
+                      $ref: './schema/post_schema.yaml'
   /posts/{id}:
     parameters:
     - in: path
@@ -89,7 +89,7 @@ paths:
                   data:
                     type: array
                     items: 
-                      $ref: './schema/post_schema.yml'   
+                      $ref: './schema/post_schema.yaml'   
   /auth/register:
     post:
       tags:
@@ -112,25 +112,25 @@ paths:
           content:
             application-json:
               schema:
-                $ref: './schema/200_schema.yml'
+                $ref: './schema/200_schema.yaml'
         '400':
           description: Validation error, ie email/name/password are empty
           content:
             application-json:
               schema:
-                $ref: './schema/400_schema.yml'
+                $ref: './schema/400_schema.yaml'
         '409':
           description: Creating user with existing email
           content:
             application-json:
               schema:
-                $ref: './schema/409_schema.yml'
+                $ref: './schema/409_schema.yaml'
         '500':
           description: Something wrong with the server 
           content:
             application-json:
               schema:
-                $ref: './schema/500_schema.yml'
+                $ref: './schema/500_schema.yaml'
   /auth/login:
     post:
       tags:
@@ -151,19 +151,19 @@ paths:
           content:
             application-json:
               schema:
-                $ref: './schema/200_token_schema.yml'
+                $ref: './schema/200_token_schema.yaml'
         '400':
           description: Validation error, ie email/password are empty
           content:
             application-json:
               schema:
-                $ref: './schema/400_schema.yml'
+                $ref: './schema/400_schema.yaml'
         '500':
           description: Something wrong with the server 
           content:
             application-json:
               schema:
-                $ref: './schema/500_schema.yml'
+                $ref: './schema/500_schema.yaml'
   /auth/refresh:
     post:
       security:
@@ -176,19 +176,19 @@ paths:
           content:
             application-json:
               schema:
-                $ref: './schema/200_token_schema.yml'
+                $ref: './schema/200_token_schema.yaml'
         '401':
           description: RefreshToken is empty/invalid
           content:
             application-json:
               schema:
-                $ref: './schema/401_schema.yml'
+                $ref: './schema/401_schema.yaml'
         '500':
           description: Something wrong with the server 
           content:
             application-json:
               schema:
-                $ref: './schema/500_schema.yml'
+                $ref: './schema/500_schema.yaml'
   /admin/posts:
     post:
       tags:
@@ -199,32 +199,32 @@ paths:
         content:
           application-json:
             schema:
-              $ref: './schema/save_post_schema.yml'
+              $ref: './schema/save_post_schema.yaml'
       responses:
         '200':
           description: Success creating a new post
           content:
             application-json:
               schema:
-                $ref: './schema/post_schema.yml'
+                $ref: './schema/post_schema.yaml'
         '400':
           description: Validation error, if title or content are empty
           content:
             application-json:
               schema:
-                $ref: './schema/400_schema.yml'
+                $ref: './schema/400_schema.yaml'
         '401':
           description: Authorization error, if token are invalid or empty
           content:
             application-json:
               schema:
-                $ref: './schema/401_schema.yml'
+                $ref: './schema/401_schema.yaml'
         '500':
           description: Something wrong with the server
           content:
             application-json:
               schema:
-                $ref: './schema/500_schema.yml'
+                $ref: './schema/500_schema.yaml'
   /admin/posts/{id}:
     parameters:
       - in: path
@@ -243,32 +243,32 @@ paths:
         content:
             application-json:
               schema:
-                $ref: './schema/save_post_schema.yml'
+                $ref: './schema/save_post_schema.yaml'
       responses:
         '200':
           description: Success updating a post
           content:
             application-json:
               schema:
-                $ref: './schema/post_schema.yml'
+                $ref: './schema/post_schema.yaml'
         '400':
           description: Validation error, if title or content are empty
           content:
             application-json:
               schema:
-                $ref: './schema/400_schema.yml'
+                $ref: './schema/400_schema.yaml'
         '401':
           description: Authorization error, if token are invalid or empty
           content:
             application-json:
               schema:
-                $ref: './schema/401_schema.yml'
+                $ref: './schema/401_schema.yaml'
         '500':
           description: Something wrong with the server
           content:
             application-json:
               schema:
-                $ref: './schema/500_schema.yml'
+                $ref: './schema/500_schema.yaml'
     delete:
       tags:
         - Admin
@@ -280,25 +280,25 @@ paths:
           content:
             application-json:
               schema:
-                $ref: './schema/post_schema.yml'
+                $ref: './schema/post_schema.yaml'
         '400':
           description: Validation error, if title or content are empty
           content:
             application-json:
               schema:
-                $ref: './schema/400_schema.yml'
+                $ref: './schema/400_schema.yaml'
         '401':
           description: Authorization error, if token are invalid or empty
           content:
             application-json:
               schema:
-                $ref: './schema/401_schema.yml'
+                $ref: './schema/401_schema.yaml'
         '500':
           description: Something wrong with the server
           content:
             application-json:
               schema:
-                $ref: './schema/500_schema.yml'
+                $ref: './schema/500_schema.yaml'
       
       
 

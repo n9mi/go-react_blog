@@ -35,7 +35,7 @@ services:
     volumes:
       - ./backend/docs:/usr/share/nginx/html/doc
     environment:
-      API_URL: backend/docs/openapi.yml
+      API_URL: backend/docs/openapi.yaml
 volumes:
   postgres-db:
   redis:
