@@ -1,0 +1,13 @@
+type: object
+properties:
+  code:
+    type: integer
+    default: 401
+  status: 
+    type: string
+    default: UNAUTHORIZED
+  messages: 
+    type: array
+    items:
+      message:
+        type: string

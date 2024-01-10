@@ -1,0 +1,13 @@
+type: object
+properties:
+  code:
+    type: integer
+    default: 400
+  status: 
+    type: string
+    default: BAD REQUEST
+  messages: 
+    type: array
+    items:
+      message:
+        type: string

@@ -1,0 +1,311 @@
+openapi: '3.0.2'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: http://127.0.0.1:5000/api
+tags:
+  - name: Guest
+  - name: Admin
+  - name: Auth
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cookie:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /posts:
+    parameters:
+      - in: query
+        name: page
+        description: applying pagination
+        schema:
+          type: integer
+          minimum: 1
+      - in: query
+        name: pageSize
+        description: applying pagination
+        schema:
+          type: integer
+          minimum: 1
+      - in: query
+        name: authorID
+        description: selecting post only created by specified user id
+        schema:
+          type: integer
+          minimum: 1
+    get:
+      tags: 
+        - Guest
+      responses:
+        '200':
+          description: OK
+          content:
+            application-json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 200
+                  status:
+                    type: string
+                    default: OK
+                  data:
+                    type: array
+                    items: 
+                      $ref: './schema/post_schema.yml'
+  /posts/{id}:
+    parameters:
+    - in: path
+      name: id
+      description: Id of a blog
+      schema:
+        type: integer
+        minimum: 1
+      required: true
+    get:
+      tags: 
+        - Guest
+      responses:
+        '200':
+          description: OK
+          content:
+            application-json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    default: 200
+                  status:
+                    type: string
+                    default: OK
+                  data:
+                    type: array
+                    items: 
+                      $ref: './schema/post_schema.yml'   
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application-json:
+            schema:
+              type: object
+              properties:
+                name: 
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Success creating a user
+          content:
+            application-json:
+              schema:
+                $ref: './schema/200_schema.yml'
+        '400':
+          description: Validation error, ie email/name/password are empty
+          content:
+            application-json:
+              schema:
+                $ref: './schema/400_schema.yml'
+        '409':
+          description: Creating user with existing email
+          content:
+            application-json:
+              schema:
+                $ref: './schema/409_schema.yml'
+        '500':
+          description: Something wrong with the server 
+          content:
+            application-json:
+              schema:
+                $ref: './schema/500_schema.yml'
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application-json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Success to logged in a user and receive RefreshToken in HTTPOnly cookie
+          content:
+            application-json:
+              schema:
+                $ref: './schema/200_token_schema.yml'
+        '400':
+          description: Validation error, ie email/password are empty
+          content:
+            application-json:
+              schema:
+                $ref: './schema/400_schema.yml'
+        '500':
+          description: Something wrong with the server 
+          content:
+            application-json:
+              schema:
+                $ref: './schema/500_schema.yml'
+  /auth/refresh:
+    post:
+      security:
+      - cookie: []
+      tags:
+        - Auth
+      responses:
+        '200':
+          description: Success getting a new refresh token.
+          content:
+            application-json:
+              schema:
+                $ref: './schema/200_token_schema.yml'
+        '401':
+          description: RefreshToken is empty/invalid
+          content:
+            application-json:
+              schema:
+                $ref: './schema/401_schema.yml'
+        '500':
+          description: Something wrong with the server 
+          content:
+            application-json:
+              schema:
+                $ref: './schema/500_schema.yml'
+  /admin/posts:
+    post:
+      tags:
+        - Admin
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application-json:
+            schema:
+              $ref: './schema/save_post_schema.yml'
+      responses:
+        '200':
+          description: Success creating a new post
+          content:
+            application-json:
+              schema:
+                $ref: './schema/post_schema.yml'
+        '400':
+          description: Validation error, if title or content are empty
+          content:
+            application-json:
+              schema:
+                $ref: './schema/400_schema.yml'
+        '401':
+          description: Authorization error, if token are invalid or empty
+          content:
+            application-json:
+              schema:
+                $ref: './schema/401_schema.yml'
+        '500':
+          description: Something wrong with the server
+          content:
+            application-json:
+              schema:
+                $ref: './schema/500_schema.yml'
+  /admin/posts/{id}:
+    parameters:
+      - in: path
+        name: id
+        description: Id of a blog
+        schema:
+          type: integer
+          minimum: 1
+        required: true
+    put:
+      tags:
+        - Admin
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+            application-json:
+              schema:
+                $ref: './schema/save_post_schema.yml'
+      responses:
+        '200':
+          description: Success updating a post
+          content:
+            application-json:
+              schema:
+                $ref: './schema/post_schema.yml'
+        '400':
+          description: Validation error, if title or content are empty
+          content:
+            application-json:
+              schema:
+                $ref: './schema/400_schema.yml'
+        '401':
+          description: Authorization error, if token are invalid or empty
+          content:
+            application-json:
+              schema:
+                $ref: './schema/401_schema.yml'
+        '500':
+          description: Something wrong with the server
+          content:
+            application-json:
+              schema:
+                $ref: './schema/500_schema.yml'
+    delete:
+      tags:
+        - Admin
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Success updating a post
+          content:
+            application-json:
+              schema:
+                $ref: './schema/post_schema.yml'
+        '400':
+          description: Validation error, if title or content are empty
+          content:
+            application-json:
+              schema:
+                $ref: './schema/400_schema.yml'
+        '401':
+          description: Authorization error, if token are invalid or empty
+          content:
+            application-json:
+              schema:
+                $ref: './schema/401_schema.yml'
+        '500':
+          description: Something wrong with the server
+          content:
+            application-json:
+              schema:
+                $ref: './schema/500_schema.yml'
+      
+      
+
+            
+
+      
+  
+
+  
+

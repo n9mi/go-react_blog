@@ -1,0 +1,13 @@
+type: object
+properties:
+  code:
+    type: integer
+    default: 500
+  status: 
+    type: string
+    default: INTERNAL SERVER ERROR
+  messages: 
+    type: array
+    items:
+      message:
+        type: string

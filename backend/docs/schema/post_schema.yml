@@ -1,0 +1,13 @@
+type: object
+properties:
+  id: 
+    type: integer
+    default: 1
+  title: 
+    type: string
+  content:  
+    type: string
+  author:
+    type: string
+  created_at:
+    type: string
