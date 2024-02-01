@@ -8,6 +8,8 @@ Simple CRUD with JWT auth using golang Echo and javascript React
 - gorm.io/driver/postgres
 - gorm.io/gorm 
 - github.com/stretchr/testify
+- github.com/redis/go-redis/v9
+- github.com/golang-jwt/jwt
 
 ## **How to run the app**
 ```
