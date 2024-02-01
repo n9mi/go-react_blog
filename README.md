@@ -23,7 +23,7 @@ sudo systemctl stop postgresql
 
 ## **Run the migration**
 Migration will automatically run when the server starts, and resetting the migration on another run.
-![image](https://github.com/naomigrain/httprouter-crud-notes/assets/113373725/2488a53e-3bf0-421c-be45-4faa2c87d66f)
+![image](https://github.com/n9mi/go-react_blog/assets/113373725/f75e9805-657f-4735-8fc2-2fef78f53ef3)
 
 ## **Structure**
 Based on repository pattern, this project use:
